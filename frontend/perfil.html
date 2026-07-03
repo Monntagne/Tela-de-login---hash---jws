@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Área Protegida</title>
+</head>
+<body id="paginaPerfil">
+    <div class="container">
+        <div class="card">
+            <h1>Área Protegida</h1>
+            <p>Cole abaixo o token JWT gerado no login</p>
+            <textarea id="campoToken" placeholder="Cole aqui seu Token"></textarea>
+            <button id="botaoValidar">Validar acesso</button>
+            <p id="mensagemPerfil" class="mensagem"></p>
+            <div id="dadosUsuario" class="perfil-info" style="display: none;">
+                <h2>Usuário autenticado</h2>
+                <p><strong>ID:</strong><span id="idUsuario"></span></p>
+                <p><strong>E-mail:</strong><span id="emailUsuario"></span></p>
+            </div>
+            <a href="login.html">Voltar para o Login</a>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
