@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, UseGuards, Req } from '@nestjs/common';
+import { Controller, Body, Post, Get, UseGuards, Req, Res, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from './auth.guard';
@@ -27,4 +27,37 @@ export class AuthController {
             usuario: req.user
         }
     }
+    @Post('session-login')
+    async sessionLogin(@Body() loginDto: LoginDto, @Req() req){
+        const usuario = await this.authService.loginComSession(loginDto)
+        req.session.usuario = usuario
+        return{
+            mensagem:'login feito com sucesso',
+            usuario
+        }
+    }
+
+    @Get('session-area')
+    sessionArea(@Req() req){
+        if(!req.session.usuario){
+            throw new UnauthorizedException('Sesão nao encontrada')
+        }
+        return{
+            mensagem:'acessou área protegida',
+            usuario: req.session.usuario
+        }
+    }
+
+
+
+
+
+@Post('session-logout')
+sessionLogout(@Req() req){
+    req.session.destroy()
+    return{
+        mensagem:'Logout feito'
+    }
+}
+
 }
